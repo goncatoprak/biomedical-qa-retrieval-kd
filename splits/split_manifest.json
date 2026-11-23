@@ -1,0 +1,32 @@
+{
+  "seed": 42,
+  "split_seed": 42,
+  "near_duplicate_threshold": 0.95,
+  "total_positive_pairs": 19287,
+  "splits": [
+    {
+      "split": "train",
+      "rows": 15426,
+      "unique_questions": 12542,
+      "unique_passages": 14902,
+      "sha256": "532180cdb76c0d0c27af7d5fdabe75e814b9596e8d666ceefc253748a3cb7a7d",
+      "file": "splits/train_positive.csv"
+    },
+    {
+      "split": "validation",
+      "rows": 1924,
+      "unique_questions": 1593,
+      "unique_passages": 1892,
+      "sha256": "a3fdfb9d6b6214bf37a8d379ea9892b7cfde8da1981eefea83fc5120761d8c58",
+      "file": "splits/validation_positive.csv"
+    },
+    {
+      "split": "test",
+      "rows": 1937,
+      "unique_questions": 1535,
+      "unique_passages": 1933,
+      "sha256": "a131960911e8373748518659d255775fa52311ed59eb3f0c89da53961094dc56",
+      "file": "splits/test_positive.csv"
+    }
+  ]
+}

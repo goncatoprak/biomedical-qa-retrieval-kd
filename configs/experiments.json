@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "task": "biomedical QA-oriented dense retrieval",
+  "fixed_splits": "splits/split_manifest.json",
+  "common_training": {
+    "optimizer": "AdamW",
+    "learning_rate": 3e-05,
+    "batch_size": 32,
+    "max_sequence_length": 256,
+    "epochs": 5,
+    "warmup_ratio": 0.1,
+    "lr_schedule": "linear warmup followed by linear decay",
+    "pooling": "attention-mask-aware mean pooling",
+    "similarity": "cosine",
+    "ranking_temperature": 0.05,
+    "teacher_temperature": 0.05,
+    "student_temperature": 0.05,
+    "lambda_kd": 1.0,
+    "checkpoint_selection": "highest validation MRR@10 after the specified five training epochs"
+  },
+  "controlled_multiseed": {
+    "teacher": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract",
+    "student": "distilbert-base-uncased",
+    "strategies": [
+      "NoKD",
+      "K1",
+      "K2",
+      "K3"
+    ],
+    "k3_alpha": 0.1,
+    "seeds": [
+      42,
+      52,
+      62,
+      72,
+      82
+    ],
+    "reported_results": "results/reported_retrieval_results.csv"
+  },
+  "k3_alpha_sensitivity": {
+    "values": [
+      0.0,
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9,
+      1.0
+    ],
+    "definition": "alpha weights embedding alignment; (1-alpha) weights teacher-ranking distillation"
+  },
+  "strategy_objectives": {
+    "NoKD": "L_rank",
+    "K1": "L_rank + lambda_KD * L_embed",
+    "K2": "L_rank + lambda_KD * L_teacher-rank",
+    "K3": "L_rank + lambda_KD * [alpha * L_embed + (1-alpha) * L_teacher-rank]"
+  }
+}

@@ -1,0 +1,9 @@
+file,size_bytes
+README.md,2292
+biomedical_kd_reproducibility.ipynb,240256
+configs/experiments.json,1504
+results/reported_retrieval_results.csv,17113
+splits/split_manifest.json,872
+splits/test_positive.csv,5405031
+splits/train_positive.csv,42056616
+splits/validation_positive.csv,5234097
